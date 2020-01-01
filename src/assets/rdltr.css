@@ -90,3 +90,16 @@ body {
   margin: auto;
   padding: 8px 16px;
 }
+
+.rdltr-error,
+.rdltr-status-not-connected {
+  color: #c83d44;
+}
+
+.rdltr-error {
+  margin-bottom: 10px;
+}
+
+.rdltr-status-connected {
+  color: #4e9c67;
+}

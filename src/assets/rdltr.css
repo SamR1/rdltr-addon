@@ -88,7 +88,7 @@ body {
 
 .rdltr {
   display: flex;
-  height: 200px;
+  height: 300px;
   justify-content: center;
   width: 400px;
 }
@@ -112,6 +112,19 @@ body {
   color: #8c95aa;
   cursor: pointer;
   padding: 8px 16px;
+}
+
+.rdltr form {
+  width: 300px;
+}
+
+.rdltr select {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font: inherit;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  width: 100%;
 }
 
 /* Common */

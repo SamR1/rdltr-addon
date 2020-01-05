@@ -4,17 +4,27 @@
       <div class="logo">rdltr <small>a simple "read-it later" app</small></div>
     </header>
     <div class="rdltr">
-      <div v-if="authToken">
+      <form @submit.prevent="addArticle()" v-if="authToken">
         <p class="rdltr-title">{{ currentTab.title }}</p>
+        <label for="categories">Category</label>
+        <select id="categories" v-model="selectedCategory">
+          <option
+            v-for="category in user.categories"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.name }}
+          </option>
+        </select>
         <span class="rdltr-success" v-if="message">{{ message }}</span>
-        <button type="submit" :disabled="loading" v-else @click="addArticle">
+        <button type="submit" :disabled="loading" v-else>
           Add to <strong>rdltr</strong>
         </button>
         <div class="rdltr-loading">
           <div class="rdltr-loader" v-if="loading"></div>
         </div>
         <span class="rdltr-error">{{ error }}</span>
-      </div>
+      </form>
       <div v-else>
         <span class="rdltr-error"
           >Not connected to an <strong>rdltr</strong> instance</span
@@ -35,6 +45,7 @@ export default {
       error: null,
       loading: null,
       message: null,
+      selectedCategory: null,
       url: null,
       user: null,
     }
@@ -57,6 +68,7 @@ export default {
       }
       const formData = {
         url: this.currentTab.url,
+        category_id: this.selectedCategory,
       }
       postToRdltr(this.url, 'articles', formData, config)
         .then(res => {

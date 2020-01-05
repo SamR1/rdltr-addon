@@ -84,19 +84,6 @@ body {
   padding: 8px 16px;
 }
 
-.rdltr-error,
-.rdltr-status-not-connected {
-  color: #c83d44;
-}
-
-.rdltr-error {
-  margin-bottom: 10px;
-}
-
-.rdltr-status-connected {
-  color: #4e9c67;
-}
-
 /* Popup */
 .rdltr {
   align-items: center;
@@ -110,6 +97,23 @@ body {
   border: 1px solid #8c95aa;
   color: #8c95aa;
   cursor: pointer;
-  margin: auto;
   padding: 8px 16px;
+}
+
+.rdltr div {
+  margin: auto;
+}
+
+/* Common */
+.rdltr-error,
+.rdltr-status-not-connected {
+  color: #c83d44;
+}
+
+.rdltr-error {
+  margin-bottom: 10px;
+}
+
+.rdltr-status-connected {
+  color: #4e9c67;
 }

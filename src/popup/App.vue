@@ -5,7 +5,8 @@
     </header>
     <div class="rdltr">
       <div v-if="authToken">
-        <button type="submit">Add current tab to <strong>rdltr</strong></button>
+        <span class="rdltr-title">{{ currentTab.title }}</span>
+        <button type="submit">Add to <strong>rdltr</strong></button>
       </div>
       <div v-else>
         <span class="rdltr-error"
@@ -21,6 +22,7 @@ export default {
   data() {
     return {
       authToken: null,
+      currentTab: null,
       error: null,
       url: null,
       user: null,
@@ -34,6 +36,24 @@ export default {
         this[itemKey] = results[itemKey]
       }
     })
+    this.getCurrentTab()
+  },
+  methods: {
+    getCurrentTab() {
+      browser.tabs
+        .query({ currentWindow: true, active: true })
+        .then(this.updateCurrentTab, this.onError)
+    },
+    updateCurrentTab(tabs) {
+      const [currentTab] = tabs
+      if (currentTab) {
+        this.currentTab = currentTab
+        this.updateError(null)
+      }
+    },
+    updateError(error) {
+      this.error = error
+    },
   },
 }
 </script>

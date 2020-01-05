@@ -94,7 +94,21 @@ body {
   align-items: center;
   display: flex;
   height: 200px;
+  justify-content: center;
   width: 400px;
+}
+
+.rdltr div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  text-align: center;
+}
+
+.rdltr-title {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .rdltr button {
@@ -103,10 +117,6 @@ body {
   color: #8c95aa;
   cursor: pointer;
   padding: 8px 16px;
-}
-
-.rdltr div {
-  margin: auto;
 }
 
 /* Common */

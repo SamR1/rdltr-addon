@@ -1,6 +1,8 @@
 {
-  "name": "rdltr-extension",
-  "description": "rdltr web extension",
+  "name": "rdltr",
+  "description": "web extension for rdltr (read-it-later app)",
+  "author": "SamR1",
+  "homepage_url": "https://github.com/SamR1/rdltr-extension",
   "version": "0.1.0",
   "manifest_version": 2,
   "icons": {

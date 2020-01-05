@@ -27,6 +27,13 @@ body {
 }
 
 /* Options */
+.rdltr-status-box {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
 .rdltr-form {
   list-style-type: none;
   padding: 0;
@@ -84,11 +91,6 @@ body {
 
 .rdltr-error {
   margin-bottom: 10px;
-}
-
-.rdltr-status-box {
-  display: flex;
-  margin-bottom: 20px;
 }
 
 .rdltr-status-connected {

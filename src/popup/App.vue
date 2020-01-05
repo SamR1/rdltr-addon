@@ -5,8 +5,14 @@
     </header>
     <div class="rdltr">
       <div v-if="authToken">
-        <span class="rdltr-title">{{ currentTab.title }}</span>
-        <button type="submit">Add to <strong>rdltr</strong></button>
+        <p class="rdltr-title">{{ currentTab.title }}</p>
+        <span class="rdltr-success" v-if="message">{{ message }}</span>
+        <button type="submit" :disabled="loading" v-else @click="addArticle">
+          Add to <strong>rdltr</strong>
+        </button>
+        <div class="rdltr-loading">
+          <div class="rdltr-loader" v-if="loading"></div>
+        </div>
       </div>
       <div v-else>
         <span class="rdltr-error"
@@ -18,12 +24,18 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+import { handleError } from '../utils'
+
 export default {
   data() {
     return {
       authToken: null,
       currentTab: null,
       error: null,
+      loading: null,
+      message: null,
       url: null,
       user: null,
     }
@@ -39,6 +51,29 @@ export default {
     this.getCurrentTab()
   },
   methods: {
+    addArticle() {
+      this.loading = true
+      const config = {
+        headers: { Authorization: `Bearer ${this.authToken}` },
+      }
+      const formData = {
+        url: this.currentTab.url,
+      }
+      axios
+        .create({
+          baseURL: `https://${this.url}/api`,
+        })
+        .post('articles', formData, config)
+        .then(res => {
+          if (res.data.status === 'success') {
+            this.message = 'Article added successfully!'
+            this.loading = false
+            return
+          }
+          return this.updateError(handleError())
+        })
+        .catch(err => this.updateError(handleError(err)))
+    },
     getCurrentTab() {
       browser.tabs
         .query({ currentWindow: true, active: true })
@@ -52,6 +87,10 @@ export default {
       }
     },
     updateError(error) {
+      if (error) {
+        this.message = null
+      }
+      this.loading = false
       this.error = error
     },
   },

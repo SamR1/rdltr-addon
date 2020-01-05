@@ -7,25 +7,6 @@ body {
   width: 400px;
 }
 
-#header {
-  align-items: center;
-  background-color: #8c95aa;
-  display: flex;
-  flex-flow: row;
-  height: 56px;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.logo {
-  color: white;
-  font-weight: bold;
-}
-
-.container {
-  margin: 0 auto;
-}
-
 /* Options */
 .rdltr-status-box {
   align-items: center;
@@ -90,8 +71,22 @@ body {
 }
 
 /* Popup */
-.rdltr {
+#header {
   align-items: center;
+  background-color: #8c95aa;
+  display: flex;
+  flex-flow: row;
+  height: 56px;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+}
+
+.rdltr {
   display: flex;
   height: 200px;
   justify-content: center;
@@ -151,6 +146,7 @@ body {
   }
 }
 
-.rdltr-status-connected {
+.rdltr-status-connected,
+.rdltr-success {
   color: #4e9c67;
 }

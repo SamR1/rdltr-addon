@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "vue": "^2.6.10",
+    "vue-multiselect": "^2.1.6",
     "webextension-polyfill": "^0.6.0"
   },
   "devDependencies": {

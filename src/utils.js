@@ -1,3 +1,12 @@
+import axios from 'axios'
+
+export const postToRdltr = (url, endpoint, data, config) =>
+  axios
+    .create({
+      baseURL: `https://${url}/api`,
+    })
+    .post(endpoint, data, config)
+
 export const handleError = (
   err,
   msg = 'Error. Please try again or contact the administrator.'

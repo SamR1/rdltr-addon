@@ -53,9 +53,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-import { handleError } from '../utils'
+import { handleError, postToRdltr } from '../utils'
 
 export default {
   name: 'App',
@@ -102,13 +100,6 @@ export default {
     },
   },
   methods: {
-    updateError(error) {
-      this.error = error
-      this.loading = false
-      if (error) {
-        this.authToken = null
-      }
-    },
     onReset() {
       this.error = null
       this.authToken = null
@@ -119,11 +110,7 @@ export default {
         password: this.password,
       }
       this.loading = true
-      axios
-        .create({
-          baseURL: `https://${this.url}/api`,
-        })
-        .post(`/auth/login`, formData)
+      postToRdltr(this.url, 'auth/login', formData)
         .then(res => {
           if (res.data.status === 'success') {
             this.authToken = res.data.auth_token
@@ -133,6 +120,13 @@ export default {
           return this.updateError(handleError())
         })
         .catch(err => this.updateError(handleError(err)))
+    },
+    updateError(error) {
+      this.error = error
+      this.loading = false
+      if (error) {
+        this.authToken = null
+      }
     },
   },
 }

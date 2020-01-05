@@ -13,6 +13,7 @@
         <div class="rdltr-loading">
           <div class="rdltr-loader" v-if="loading"></div>
         </div>
+        <span class="rdltr-error">{{ error }}</span>
       </div>
       <div v-else>
         <span class="rdltr-error"
@@ -24,9 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-import { handleError } from '../utils'
+import { handleError, postToRdltr } from '../utils'
 
 export default {
   data() {
@@ -59,16 +58,12 @@ export default {
       const formData = {
         url: this.currentTab.url,
       }
-      axios
-        .create({
-          baseURL: `https://${this.url}/api`,
-        })
-        .post('articles', formData, config)
+      postToRdltr(this.url, 'articles', formData, config)
         .then(res => {
           if (res.data.status === 'success') {
             this.message = 'Article added successfully!'
             this.loading = false
-            return
+            return this.updateError(null)
           }
           return this.updateError(handleError())
         })
@@ -87,11 +82,11 @@ export default {
       }
     },
     updateError(error) {
+      this.error = error
+      this.loading = false
       if (error) {
         this.message = null
       }
-      this.loading = false
-      this.error = error
     },
   },
 }

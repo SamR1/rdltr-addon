@@ -16,6 +16,12 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
+    }
+  ],
   "permissions": ["*://*/", "activeTab", "storage"],
   "options_ui": {
     "page": "options/options.html",

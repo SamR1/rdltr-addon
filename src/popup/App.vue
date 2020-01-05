@@ -57,6 +57,7 @@ export default {
     return {
       authToken: null,
       currentTab: null,
+      currentTabContent: null,
       error: null,
       loading: null,
       message: null,
@@ -111,6 +112,12 @@ export default {
       if (currentTab) {
         this.currentTab = currentTab
         this.updateError(null)
+        browser.tabs
+          .sendMessage(currentTab.id, { req: 'source-code' })
+          .then(response => {
+            this.currentTabContent = response.content
+          })
+          .catch(err => console.error(err))
       }
     },
     updateError(error) {

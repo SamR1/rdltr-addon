@@ -84,6 +84,11 @@ body {
   padding: 8px 16px;
 }
 
+.rdltr-form li button[disabled] {
+  background: #a7a7a7;
+  cursor: not-allowed;
+}
+
 /* Popup */
 .rdltr {
   align-items: center;
@@ -112,6 +117,28 @@ body {
 
 .rdltr-error {
   margin-bottom: 10px;
+}
+
+.rdltr-loading {
+  margin-left: auto;
+}
+
+.rdltr-loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #8c95aa;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .rdltr-status-connected {

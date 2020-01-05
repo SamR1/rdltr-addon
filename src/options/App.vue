@@ -37,7 +37,10 @@
           <input type="password" id="password" required v-model="password" />
         </li>
         <li>
-          <button type="submit">
+          <div class="rdltr-loading">
+            <div class="rdltr-loader" v-if="loading"></div>
+          </div>
+          <button type="submit" :disabled="loading">
             {{ authToken && user.email ? 'Update' : 'Submit' }}
           </button>
         </li>
@@ -60,6 +63,7 @@ export default {
     return {
       authToken: null,
       error: null,
+      loading: false,
       password: null,
       url: null,
       user: {
@@ -100,6 +104,7 @@ export default {
   methods: {
     updateError(error) {
       this.error = error
+      this.loading = false
       if (error) {
         this.authToken = null
       }
@@ -113,6 +118,7 @@ export default {
         email: this.user.email,
         password: this.password,
       }
+      this.loading = true
       axios
         .create({
           baseURL: `https://${this.url}/api`,

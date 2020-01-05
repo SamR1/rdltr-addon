@@ -26,6 +26,7 @@ body {
   margin: 0 auto;
 }
 
+/* Options */
 .rdltr-form {
   list-style-type: none;
   padding: 0;
@@ -66,7 +67,8 @@ body {
   padding: 15px;
 }
 
-.rdltr-form li button {
+.rdltr-form li button,
+.rdltr-button {
   background: #8c95aa;
   border: none;
   border-radius: 2px;
@@ -75,6 +77,25 @@ body {
   padding: 8px 16px;
 }
 
+.rdltr-error,
+.rdltr-status-not-connected {
+  color: #c83d44;
+}
+
+.rdltr-error {
+  margin-bottom: 10px;
+}
+
+.rdltr-status-box {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.rdltr-status-connected {
+  color: #4e9c67;
+}
+
+/* Popup */
 .rdltr {
   align-items: center;
   display: flex;
@@ -89,17 +110,4 @@ body {
   cursor: pointer;
   margin: auto;
   padding: 8px 16px;
-}
-
-.rdltr-error,
-.rdltr-status-not-connected {
-  color: #c83d44;
-}
-
-.rdltr-error {
-  margin-bottom: 10px;
-}
-
-.rdltr-status-connected {
-  color: #4e9c67;
 }

@@ -1,11 +1,21 @@
 <template>
   <div>
-    <p>
-      Status:
-      <span :class="`rdltr-status-${authToken ? '' : 'not-'}connected`"
-        >{{ authToken ? '' : 'not ' }}connected</span
+    <div class="rdltr-status-box">
+      <p>
+        Status:
+        <span :class="`rdltr-status-${authToken ? '' : 'not-'}connected`"
+          >{{ authToken ? '' : 'not ' }}connected</span
+        >
+      </p>
+      <button
+        type="submit"
+        class="rdltr-button"
+        v-if="authToken"
+        @click="onReset"
       >
-    </p>
+        Disconnect
+      </button>
+    </div>
     <form @submit.prevent="onSubmit()">
       <ul class="rdltr-form">
         <li>
@@ -78,8 +88,8 @@ export default {
         user: {
           username: newUser.username,
           email: newUser.email,
-          categories: newUser.categories,
-          tags: newUser.tags,
+          categories: JSON.parse(JSON.stringify(newUser.categories)),
+          tags: JSON.parse(JSON.stringify(newUser.tags)),
         },
       })
     },
@@ -93,6 +103,10 @@ export default {
       if (error) {
         this.authToken = null
       }
+    },
+    onReset() {
+      this.error = null
+      this.authToken = null
     },
     onSubmit() {
       const formData = {

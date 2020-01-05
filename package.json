@@ -1,7 +1,7 @@
 {
-  "name": "rdltr-extension",
+  "name": "rdltr-addon",
   "version": "0.1.0",
-  "description": "rdltr web extension",
+  "description": "rdltr firefox addon",
   "engines": {
     "node": ">=10"
   },

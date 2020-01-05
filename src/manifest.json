@@ -1,8 +1,8 @@
 {
   "name": "rdltr",
-  "description": "web extension for rdltr (read-it-later app)",
+  "description": "save articles with rdltr to read them later.",
   "author": "SamR1",
-  "homepage_url": "https://github.com/SamR1/rdltr-extension",
+  "homepage_url": "https://github.com/SamR1/rdltr-addon",
   "version": "0.1.0",
   "manifest_version": 2,
   "icons": {
@@ -10,7 +10,7 @@
     "128": "icons/icon_128.png"
   },
   "browser_action": {
-    "default_title": "rdltr-extension",
+    "default_title": "rdltr",
     "default_popup": "popup/popup.html"
   },
   "background": {

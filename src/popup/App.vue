@@ -3,7 +3,7 @@
     <header id="header">
       <div class="logo">rdltr <small>a simple "read-it later" app</small></div>
     </header>
-    <div class="rdltr">
+    <div class="rdltr-container">
       <form @submit.prevent="addArticle()" v-if="authToken">
         <p class="rdltr-title">{{ currentTab.title }}</p>
         <label for="categories">Category</label>
@@ -16,12 +16,23 @@
             {{ category.name }}
           </option>
         </select>
+        <label>Tags</label>
+        <app-multiselect
+          placeholder="Search or add a tag"
+          v-model="selectedTags"
+          :multiple="true"
+          :options="user.tags.map(tag => tag.name)"
+          :taggable="true"
+          @tag="addTag"
+        ></app-multiselect>
         <span class="rdltr-success" v-if="message">{{ message }}</span>
-        <button type="submit" :disabled="loading" v-else>
-          Add to <strong>rdltr</strong>
-        </button>
-        <div class="rdltr-loading">
-          <div class="rdltr-loader" v-if="loading"></div>
+        <div class="rdltr-loading-button" v-else>
+          <button type="submit" :disabled="loading">
+            Add to <strong>rdltr</strong>
+          </button>
+          <div class="rdltr-loading">
+            <div class="rdltr-loader" v-if="loading"></div>
+          </div>
         </div>
         <span class="rdltr-error">{{ error }}</span>
       </form>
@@ -35,9 +46,13 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import { handleError, postToRdltr } from '../utils'
 
 export default {
+  components: {
+    AppMultiselect: Multiselect,
+  },
   data() {
     return {
       authToken: null,
@@ -46,6 +61,7 @@ export default {
       loading: null,
       message: null,
       selectedCategory: null,
+      selectedTags: [],
       url: null,
       user: null,
     }
@@ -69,6 +85,7 @@ export default {
       const formData = {
         url: this.currentTab.url,
         category_id: this.selectedCategory,
+        tags: this.selectedTags,
       }
       postToRdltr(this.url, 'articles', formData, config)
         .then(res => {
@@ -80,6 +97,9 @@ export default {
           return this.updateError(handleError())
         })
         .catch(err => this.updateError(handleError(err)))
+    },
+    addTag(newTag) {
+      this.selectedTags.push(newTag)
     },
     getCurrentTab() {
       browser.tabs
@@ -104,4 +124,5 @@ export default {
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style src="../assets/rdltr.css"></style>

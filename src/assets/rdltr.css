@@ -86,19 +86,12 @@ body {
   font-weight: bold;
 }
 
-.rdltr {
+.rdltr-container {
   display: flex;
-  height: 300px;
+  min-height: 250px;
   justify-content: center;
+  margin-bottom: 20px;
   width: 400px;
-}
-
-.rdltr div {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  text-align: center;
 }
 
 .rdltr-title {
@@ -106,7 +99,7 @@ body {
   margin-bottom: 10px;
 }
 
-.rdltr button {
+.rdltr-container button {
   background-color: #f5f5f7;
   border: 1px solid #8c95aa;
   color: #8c95aa;
@@ -114,11 +107,16 @@ body {
   padding: 8px 16px;
 }
 
-.rdltr form {
+.rdltr-container button[disabled] {
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+.rdltr-container form {
   width: 300px;
 }
 
-.rdltr select {
+.rdltr-container select {
   box-sizing: border-box;
   border: 1px solid #ccc;
   font: inherit;
@@ -142,6 +140,11 @@ body {
   margin-left: auto;
 }
 
+.rdltr-loading-button {
+  display: flex;
+  justify-content: space-between;
+}
+
 .rdltr-loader {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #8c95aa;
@@ -163,4 +166,42 @@ body {
 .rdltr-status-connected,
 .rdltr-success {
   color: #4e9c67;
+}
+
+/* multi select */
+.multiselect {
+  background: yellow;
+  margin: 0 0 10px 0 !important;
+}
+.multiselect__input {
+  border-color: black;
+  margin: 0 !important;
+}
+
+.multiselect__option--highlight,
+.multiselect__option--highlight:after {
+  background: #8c95aa;
+  color: #fff;
+}
+
+.multiselect__tag {
+  background-color: #a3aabb;
+}
+
+.multiselect__tag-icon {
+  color: white;
+}
+
+.multiselect__tag-icon:after {
+  color: white;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: #8c95aa;
+}
+
+.multiselect__tags {
+  border: 1px solid #ccc;
+  border-radius: 0;
 }

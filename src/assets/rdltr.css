@@ -88,9 +88,10 @@ body {
 
 .rdltr-container {
   display: flex;
-  min-height: 250px;
+  font-size: 0.9em;
   justify-content: center;
   margin-bottom: 20px;
+  min-height: 250px;
   width: 400px;
 }
 

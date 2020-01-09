@@ -25,6 +25,10 @@
           :taggable="true"
           @tag="addTag"
         ></app-multiselect>
+        <input id="fromBrowser" type="checkbox" v-model="fromBrowser" />
+        <label for="fromBrowser">
+          from browser
+        </label>
         <span class="rdltr-success" v-if="message">{{ message }}</span>
         <div class="rdltr-loading-button" v-else>
           <button type="submit" :disabled="loading">
@@ -59,6 +63,7 @@ export default {
       currentTab: null,
       currentTabContent: null,
       error: null,
+      fromBrowser: true,
       loading: null,
       message: null,
       selectedCategory: null,
@@ -87,6 +92,10 @@ export default {
         url: this.currentTab.url,
         category_id: this.selectedCategory,
         tags: this.selectedTags,
+      }
+      if (this.fromBrowser) {
+        formData.html_content = this.currentTabContent
+        formData.title = this.currentTab.title
       }
       postToRdltr(this.url, 'articles', formData, config)
         .then(res => {

@@ -201,7 +201,6 @@ body {
 
 /* multi select */
 .multiselect {
-  background: yellow;
   margin: 0 0 10px 0 !important;
 }
 .multiselect__input {

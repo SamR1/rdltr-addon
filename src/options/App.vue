@@ -20,13 +20,16 @@
       <ul class="rdltr-form">
         <li>
           <label for="url">Instance url</label>
-          <input
-            type="text"
-            id="url"
-            placeholder="Enter your rdltr instance url"
-            required
-            v-model="url"
-          />
+          <div class="input-prepend">
+            <div class="input-prepend-text">https://</div>
+            <input
+              type="text"
+              id="url"
+              placeholder="Enter your rdltr instance url"
+              required
+              v-model="url"
+            />
+          </div>
         </li>
         <li>
           <label for="email">Email</label>

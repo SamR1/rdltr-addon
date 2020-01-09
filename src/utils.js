@@ -3,7 +3,7 @@ import axios from 'axios'
 export const postToRdltr = (url, endpoint, data, config) =>
   axios
     .create({
-      baseURL: `${url}/api`,
+      baseURL: `https://${url}/api`,
     })
     .post(endpoint, data, config)
 

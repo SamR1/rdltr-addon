@@ -16,7 +16,7 @@
         Disconnect
       </button>
     </div>
-    <form @submit.prevent="onSubmit()">
+    <form @submit.prevent="onSubmit">
       <ul class="rdltr-form">
         <li>
           <label for="url">Instance url</label>
@@ -68,7 +68,6 @@ export default {
       password: null,
       url: null,
       user: {
-        username: null,
         email: null,
         categories: [],
         tags: [],
@@ -86,13 +85,13 @@ export default {
   },
   watch: {
     authToken(newAuthToken) {
-      browser.storage.local.set({ authToken: newAuthToken })
+      if (newAuthToken) {
+        browser.storage.local.set({ authToken: newAuthToken })
+      }
     },
     user(newUser) {
       browser.storage.local.set({
         user: {
-          username: newUser.username,
-          email: newUser.email,
           categories: JSON.parse(JSON.stringify(newUser.categories)),
           tags: JSON.parse(JSON.stringify(newUser.tags)),
         },
@@ -103,11 +102,16 @@ export default {
     },
   },
   methods: {
+    emptyStorage() {
+      this.authToken = null
+      browser.storage.local.remove('authToken')
+      browser.storage.local.remove('user')
+    },
     onReset() {
       this.error = null
-      this.authToken = null
+      this.emptyStorage()
     },
-    onSubmit() {
+    onSubmit(e) {
       const formData = {
         email: this.user.email,
         password: this.password,
@@ -117,7 +121,13 @@ export default {
         .then(res => {
           if (res.data.status === 'success') {
             this.authToken = res.data.auth_token
-            this.user = res.data.user
+            this.user = {
+              email: null,
+              categories: res.data.user.categories,
+              tags: res.data.user.tags,
+            }
+            this.password = null
+            e.target.reset()
             return this.updateError(null)
           }
           return this.updateError(handleError())
@@ -128,7 +138,7 @@ export default {
       this.error = error
       this.loading = false
       if (error) {
-        this.authToken = null
+        this.emptyStorage()
       }
     },
   },

@@ -19,3 +19,11 @@ export const handleError = (
     ? err.message
     : msg
 }
+
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Work_with_the_Bookmarks_API
+export const isSupportedProtocol = urlString => {
+  const supportedProtocols = ['https:', 'http:']
+  const url = document.createElement('a')
+  url.href = urlString
+  return supportedProtocols.indexOf(url.protocol) !== -1
+}

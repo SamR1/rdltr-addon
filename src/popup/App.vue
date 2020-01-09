@@ -4,46 +4,51 @@
       <div class="logo">rdltr <small>a simple "read-it later" app</small></div>
     </header>
     <div class="rdltr-container">
-      <form @submit.prevent="addArticle()" v-if="authToken">
-        <p class="rdltr-title">{{ currentTab.title }}</p>
-        <label for="categories">Category</label>
-        <select id="categories" v-model="selectedCategory">
-          <option
-            v-for="category in user.categories"
-            :key="category.id"
-            :value="category.id"
-          >
-            {{ category.name }}
-          </option>
-        </select>
-        <label>Tags</label>
-        <app-multiselect
-          placeholder="Search or add a tag"
-          v-model="selectedTags"
-          :multiple="true"
-          :options="user.tags.map(tag => tag.name)"
-          :taggable="true"
-          @tag="addTag"
-        ></app-multiselect>
-        <input id="fromBrowser" type="checkbox" v-model="fromBrowser" />
-        <label for="fromBrowser">
-          from browser
-        </label>
-        <span class="rdltr-success" v-if="message">{{ message }}</span>
-        <div class="rdltr-loading-button" v-else>
-          <button type="submit" :disabled="loading">
-            Add to <strong>rdltr</strong>
-          </button>
-          <div class="rdltr-loading">
-            <div class="rdltr-loader" v-if="loading"></div>
+      <div v-if="isSupportedProtocol">
+        <form @submit.prevent="addArticle()" v-if="authToken">
+          <p class="rdltr-title">{{ currentTab.title }}</p>
+          <label for="categories">Category</label>
+          <select id="categories" v-model="selectedCategory">
+            <option
+              v-for="category in user.categories"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+          <label>Tags</label>
+          <app-multiselect
+            placeholder="Search or add a tag"
+            v-model="selectedTags"
+            :multiple="true"
+            :options="user.tags.map(tag => tag.name)"
+            :taggable="true"
+            @tag="addTag"
+          ></app-multiselect>
+          <input id="fromBrowser" type="checkbox" v-model="fromBrowser" />
+          <label for="fromBrowser">
+            from browser
+          </label>
+          <span class="rdltr-success" v-if="message">{{ message }}</span>
+          <div class="rdltr-loading-button" v-else>
+            <button type="submit" :disabled="loading">
+              Add to <strong>rdltr</strong>
+            </button>
+            <div class="rdltr-loading">
+              <div class="rdltr-loader" v-if="loading"></div>
+            </div>
           </div>
+          <span class="rdltr-error">{{ error }}</span>
+        </form>
+        <div v-else>
+          <span class="rdltr-error"
+            >Not connected to an <strong>rdltr</strong> instance</span
+          >
         </div>
-        <span class="rdltr-error">{{ error }}</span>
-      </form>
+      </div>
       <div v-else>
-        <span class="rdltr-error"
-          >Not connected to an <strong>rdltr</strong> instance</span
-        >
+        <p class="rdltr-not-supported">Not supported tab</p>
       </div>
     </div>
   </div>
@@ -51,7 +56,7 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
-import { handleError, postToRdltr } from '../utils'
+import { handleError, isSupportedProtocol, postToRdltr } from '../utils'
 
 export default {
   components: {
@@ -64,6 +69,7 @@ export default {
       currentTabContent: null,
       error: null,
       fromBrowser: true,
+      isSupportedProtocol: false,
       loading: null,
       message: null,
       selectedCategory: null,
@@ -81,6 +87,7 @@ export default {
       }
     })
     this.getCurrentTab()
+    this.isSupportedProtocol = isSupportedProtocol(this.currentTab.url)
   },
   methods: {
     addArticle() {

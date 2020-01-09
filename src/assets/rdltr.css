@@ -164,6 +164,11 @@ body {
   }
 }
 
+.rdltr-not-supported {
+  font-weight: bold;
+  margin-top: 110px;
+}
+
 .rdltr-status-connected,
 .rdltr-success {
   color: #4e9c67;

@@ -164,7 +164,12 @@ body {
   }
 }
 
-.rdltr-not-supported {
+.rdltr-not-connected {
+  color: #c83d44;
+}
+
+.rdltr-not-supported,
+.rdltr-not-connected {
   font-weight: bold;
   margin-top: 110px;
 }

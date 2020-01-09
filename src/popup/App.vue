@@ -42,9 +42,9 @@
           <span class="rdltr-error">{{ error }}</span>
         </form>
         <div v-else>
-          <span class="rdltr-error"
-            >Not connected to an <strong>rdltr</strong> instance</span
-          >
+          <p class="rdltr-not-connected">
+            Not connected to an <strong>rdltr</strong> instance
+          </p>
         </div>
       </div>
       <div v-else>
@@ -87,7 +87,6 @@ export default {
       }
     })
     this.getCurrentTab()
-    this.isSupportedProtocol = isSupportedProtocol(this.currentTab.url)
   },
   methods: {
     addArticle() {
@@ -127,6 +126,7 @@ export default {
       const [currentTab] = tabs
       if (currentTab) {
         this.currentTab = currentTab
+        this.isSupportedProtocol = isSupportedProtocol(currentTab.url)
         this.updateError(null)
         browser.tabs
           .sendMessage(currentTab.id, { req: 'source-code' })

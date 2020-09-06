@@ -27,9 +27,7 @@
             @tag="addTag"
           ></app-multiselect>
           <input id="fromBrowser" type="checkbox" v-model="fromBrowser" />
-          <label for="fromBrowser">
-            from browser
-          </label>
+          <label for="fromBrowser"> from browser </label>
           <span class="rdltr-success" v-if="message">{{ message }}</span>
           <div class="rdltr-loading-button" v-else>
             <button type="submit" :disabled="loading">

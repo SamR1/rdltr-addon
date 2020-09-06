@@ -17,12 +17,9 @@ body {
 
 .rdltr-form {
   list-style-type: none;
-  padding: 0;
-}
-
-.rdltr-form {
   margin: 0 auto;
   max-width: 800px;
+  padding: 0;
 }
 
 .rdltr-form li {
@@ -31,7 +28,7 @@ body {
   flex-wrap: wrap;
 }
 
-.rdltr-form > li:not(:last-child) {
+.rdltr-form > li {
   margin-bottom: 20px;
 }
 
@@ -43,15 +40,16 @@ body {
 .rdltr-form > li > label,
 .rdltr-form li p {
   flex: 1 0 120px;
-  max-width: 220px;
+  max-width: 260px;
 }
 
 .rdltr-form > li > label + * {
-  flex: 1 0 220px;
+  flex: 1 0 260px;
 }
 
 .rdltr-form li input {
   border: none;
+  background: #e9ecef;
   padding: 15px;
 }
 
@@ -87,7 +85,7 @@ body {
 }
 
 #url {
-  max-width: 193px;
+  max-width: 209px;
 }
 
 /* Popup */

@@ -19,4 +19,4 @@ Just enter instance url and credentials to connect to **rdltr**.
 
 Notes:
 
-- web extension generated with [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension)
+- web extension generated with [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension) (v1)

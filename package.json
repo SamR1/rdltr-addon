@@ -21,7 +21,7 @@
     }
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "vue": "^2.6.12",
     "vue-multiselect": "^2.1.6",
     "webextension-polyfill": "^0.6.0"

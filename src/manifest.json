@@ -3,7 +3,7 @@
   "description": "save articles with rdltr to read them later.",
   "author": "SamR1",
   "homepage_url": "https://github.com/SamR1/rdltr-addon",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "manifest_version": 2,
   "icons": {
     "48": "icons/icon_48.png",

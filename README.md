@@ -1,5 +1,7 @@
 # rdltr-addon
 
+> ⚠️ **rdltr-addon** is no longer maintained.
+
 Firefox add-on to add articles to an [rdltr](https://github.com/SamR1/rdltr) instance.
 
 ## Preferences
